@@ -1,0 +1,71 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+    {% if doc %}
+
+        <!-- Flight Details Card -->
+        <div class="flight-card" style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid #e9ecef;">
+
+            <!-- Route -->
+            {% if route_display %}
+            <div style="font-size: 1.3rem; color: #495057; margin-bottom: 20px; font-weight: 500;">
+                {{ route_display }}
+            </div>
+            {% endif %}
+
+            <!-- Airline Name -->
+            {% if airline_name %}
+            <h1 style="font-size: 2rem; font-weight: bold; margin: 0 0 20px 0; color: #212529;">
+                <strong>Airline:</strong> {{ airline_name }}
+            </h1>
+            {% endif %}
+
+            <!-- Flight Details -->
+            <div class="flight-info" style="margin-bottom: 24px;">
+                {% if doc.date_of_departure %}
+                <div>
+                    <strong>Date of Departure:</strong> 
+                    {{ frappe.utils.formatdate(doc.date_of_departure, "d MMMM, YYYY") }}
+                </div>
+                {% endif %}
+                {% if doc.time_of_departure %}
+                <div>
+                    <strong>Time of Departure:</strong> {{ frappe.utils.format_time(doc.time_of_departure) }}
+                </div>
+                {% endif %}
+                {% if doc.duration %}
+                <div>
+                    <strong>Duration:</strong> {{ frappe.utils.format_duration(doc.duration) }}
+                </div>
+                {% endif %}
+                {% if doc.source_airport_code %}
+                <div><strong>Source Airport:</strong> {{ doc.source_airport_code }}</div>
+                {% endif %}
+                {% if doc.destination_airport_code %}
+                <div><strong>Destination Airport:</strong> {{ doc.destination_airport_code }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Book Flight Link -->
+            <a href="/book-flight-ticket/new?flight={{ doc.name }}&passenger={{ frappe.session.user }}&flight_price=299"
+               style="color: #007bff; text-decoration: none; font-weight: 500; display: inline-block; margin-top: 20px; margin-right: 20px;">
+               Book Flight
+            </a>
+
+            <!-- Back to List Link -->
+            <a href="/flights"
+               style="color: #6c757d; text-decoration: none; font-weight: 500; display: inline-block; margin-top: 20px;">
+               ← Back to List
+            </a>
+
+        </div>
+
+    {% else %}
+        <div style="text-align: center; padding: 40px; color: #6c757d;">
+            <p>Flight not found.</p>
+            <a href="/flights" style="color: #007bff; text-decoration: none;">← Back to List</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

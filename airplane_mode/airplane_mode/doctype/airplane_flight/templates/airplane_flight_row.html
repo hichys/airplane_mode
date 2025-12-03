@@ -1,0 +1,89 @@
+<style>
+	.flight-card {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		padding: 20px;
+		border: 1px solid #e5e5e5;
+		border-radius: 12px;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+		margin-bottom: 16px;
+		transition: transform .2s ease, box-shadow .2s ease;
+	}
+	
+	.flight-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+	}
+	
+	.flight-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	.flight-title {
+		font-size: 1.4rem;
+		font-weight: 600;
+		color: #222;
+	}
+	
+	.flight-info {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		color: #555;
+	}
+	
+	.flight-route {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+		font-size: 1rem;
+		font-weight: 500;
+	}
+	
+	.view-btn {
+		padding: 10px 16px;
+		color: rgb(79, 0, 157);
+		text-decoration: none;
+		border-radius: 8px;
+	}
+	
+	
+	
+	</style>
+	
+	<div class="flight-card">
+	
+		<div class="flight-header">
+			<div class="flight-title">{{ doc.title or doc.name }}</div>
+		</div>
+	
+		<div class="flight-info">
+	
+			
+	
+			{% if doc.source_airport_code and doc.destination_airport_code %}
+			<div class="flight-route">
+				✈️ {{ doc.source_airport_code }} → {{ doc.destination_airport_code }}
+			</div>
+			{% endif %}
+			<!-- format date to name of the month , etc -->
+			{% if doc.date_of_departure %}
+			<div> 
+				{{ frappe.utils.formatdate(doc.date_of_departure, "MMMM d, YYYY") }}
+				| {{ frappe.utils.format_time(doc.time_of_departure) }}
+				| {{ frappe.utils.format_duration(doc.duration)}}
+			</div>
+			{% endif %}
+ 
+	
+		</div>
+	
+		<a href="/{{ doc.route }}" class="view-btn">
+			View Flight
+		</a>
+	
+	</div>
+	

@@ -7,6 +7,16 @@ app_license = "mit"
 
 # Apps
 # ------------------
+# hooks.py
+
+fixtures = [
+    {
+        "dt": "Web Form",
+        "filters": [
+            ["name", "in", ["book-flight-ticket"]]
+        ]
+    }
+]
 
 # required_apps = []
 
@@ -26,7 +36,7 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/airplane_mode/css/airplane_mode.css"
-# app_include_js = "/assets/airplane_mode/js/airplane_mode.js"
+app_include_js = "/assets/airplane_mode/js/notifications.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/airplane_mode/css/airplane_mode.css"
@@ -161,6 +171,17 @@ app_license = "mit"
 # 	],
 # }
 
+scheduler_events = {
+	"hourly": [
+		"airplane_mode.tasks.hourly"
+	],
+    "cron": {
+    "55 12 * * *": [
+        "airplane_mode.tasks.everyday"
+    ]
+    }
+	
+}
 # Testing
 # -------
 
