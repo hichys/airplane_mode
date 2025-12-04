@@ -51,7 +51,7 @@
    "link_fieldname": "airline"
   }
  ],
- "modified": "2025-12-04 12:30:49.785253",
+ "modified": "2025-12-04 12:38:02.227202",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airline",
@@ -94,6 +94,7 @@
   {
    "email": 1,
    "export": 1,
+   "if_owner": 1,
    "print": 1,
    "read": 1,
    "report": 1,
