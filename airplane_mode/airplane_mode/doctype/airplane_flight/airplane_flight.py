@@ -10,6 +10,19 @@ from frappe.model.document import Document
 class AirplaneFlight(WebsiteGenerator,Document):
 	def on_submit(self):
 		self.status = "Completed"
+	def before_update_after_submit(self):
+		old_gate = frappe.db.get_value("Airplane Flight", self.name, "gate_number")
+		new_gate = self.gate_number
+
+		if old_gate != new_gate:
+			frappe.enqueue(
+				"airplane_mode.airplane_mode.doctype.airplane_flight.airplane_flight.update_ticket_gates",
+				flight_name=self.name,
+				gate_number=new_gate,
+				queue="default"   # FIXED
+			)
+
+			frappe.msgprint("Gate changed. Updating tickets in background...")
 	def get_context(self, context):
 		# Get airplane and airline details for individual flight pages
 		if self.airplane:
@@ -41,3 +54,20 @@ class AirplaneFlight(WebsiteGenerator,Document):
 			context.route_display = f"{self.source_airport_code} → {self.destination_airport_code}"
 		
 		return context
+
+def update_ticket_gates(flight_name, gate_number):
+    frappe.logger().info(f"[AirplaneFlight] Updating ticket gates for {flight_name}")
+
+    frappe.db.set_value(
+        "Airplane Ticket",
+        {"flight": flight_name},
+        "gate_number",
+        gate_number
+    )
+    frappe.db.commit()
+
+    frappe.publish_realtime(
+        "update_gate_message",
+        {"message": f"Tickets updated to new gate {gate_number}"},
+        user=frappe.session.user
+    )
