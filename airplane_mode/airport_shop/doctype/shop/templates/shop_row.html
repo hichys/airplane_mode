@@ -1,0 +1,145 @@
+<style>
+.shop-card {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding: 20px;
+	border: 1px solid #e5e5e5;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+	margin-bottom: 16px;
+	transition: transform .2s ease, box-shadow .2s ease;
+	background: #fff;
+}
+
+.shop-card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.shop-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.shop-title {
+	font-size: 1.4rem;
+	font-weight: 600;
+	color: #222;
+}
+
+.shop-info {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	color: #555;
+}
+
+.shop-location {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+.shop-status {
+	display: inline-block;
+	padding: 4px 12px;
+	border-radius: 20px;
+	font-size: 0.85rem;
+	font-weight: 500;
+}
+
+.status-available {
+	background: #d4edda;
+	color: #155724;
+}
+
+.status-rented {
+	background: #cce5ff;
+	color: #004085;
+}
+
+.status-maintenance {
+	background: #fff3cd;
+	color: #856404;
+}
+
+.status-reserved {
+	background: #f8d7da;
+	color: #721c24;
+}
+
+.shop-type-badge {
+	display: inline-block;
+	padding: 4px 10px;
+	background: #e9ecef;
+	border-radius: 6px;
+	font-size: 0.85rem;
+	color: #495057;
+}
+
+.view-btn {
+	padding: 10px 16px;
+	color: rgb(79, 0, 157);
+	text-decoration: none;
+	border-radius: 8px;
+	font-weight: 500;
+}
+
+.view-btn:hover {
+	background: rgba(79, 0, 157, 0.1);
+}
+</style>
+
+<div class="shop-card">
+
+	<div class="shop-header">
+		<div class="shop-title">{{ doc.shop_name or doc.name }}</div>
+		{% set status_class = 'status-available' %}
+		{% if doc.status == 'Rented' %}
+			{% set status_class = 'status-rented' %}
+		{% elif doc.status == 'Under Maintenance' %}
+			{% set status_class = 'status-maintenance' %}
+		{% elif doc.status == 'Reserved' %}
+			{% set status_class = 'status-reserved' %}
+		{% endif %}
+		<span class="shop-status {{ status_class }}">{{ doc.status }}</span>
+	</div>
+
+	<div class="shop-info">
+		{% if doc.shop_type %}
+		<div>
+			<span class="shop-type-badge">{{ doc.shop_type }}</span>
+		</div>
+		{% endif %}
+
+		{% if doc.airport %}
+		<div class="shop-location">
+			📍 {{ doc.airport }}
+		</div>
+		{% endif %}
+
+		{% if doc.shop_number %}
+		<div>
+			Shop #{{ doc.shop_number }}
+			{% if doc.shop_area %}
+			| Area: {{ doc.shop_area }}
+			{% endif %}
+		</div>
+		{% endif %}
+
+		{% if doc.rent_amount %}
+		<div>
+			💰 Rent: {{ frappe.format_value(doc.rent_amount, {'fieldtype': 'Currency'}) }}
+		</div>
+		{% endif %}
+	</div>
+
+	<a href="/{{ doc.route }}" class="view-btn">
+		View Shop Details →
+	</a>
+
+</div>

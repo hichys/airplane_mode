@@ -1,0 +1,32 @@
+# Copyright (c) 2026, awad mohamed and contributors
+# For license information, please see license.txt
+
+import frappe
+from frappe.model.document import Document
+
+
+class ShopLead(Document):
+	pass
+
+@frappe.whitelist()
+def make_contract(source_name):
+    def set_missing_values(source, target):
+        target.start_date = frappe.utils.today()
+
+    doc = frappe.model.mapper.get_mapped_doc(
+        "Shop Lead",
+        source_name,
+        {
+            "Shop Lead": {
+                "doctype": "Shop Contract",
+                "field_map": {
+                    "shop": "shop",
+                    "full_name": "tenant",
+                    "email": "tenant_email",
+                }
+            }
+        },
+        postprocess=set_missing_values
+    )
+
+    return doc

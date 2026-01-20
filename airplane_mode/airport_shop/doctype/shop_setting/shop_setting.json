@@ -1,0 +1,69 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-14 14:58:45.803455",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "default_setting_section",
+  "default_rent_amount",
+  "rent_reminders",
+  "column_break_bpkh",
+  "rental_type"
+ ],
+ "fields": [
+  {
+   "fieldname": "default_setting_section",
+   "fieldtype": "Section Break",
+   "label": "Default Setting"
+  },
+  {
+   "fieldname": "default_rent_amount",
+   "fieldtype": "Currency",
+   "label": "Default Rent Amount"
+  },
+  {
+   "default": "0",
+   "fieldname": "rent_reminders",
+   "fieldtype": "Check",
+   "label": "Rent Reminders"
+  },
+  {
+   "fieldname": "column_break_bpkh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Daily/Short-Term : 3 days minimum<br>\nLong-Term : 5 - 10 years<br>\nMonthly : every 30 days ",
+   "fieldname": "rental_type",
+   "fieldtype": "Select",
+   "label": "The minimum days for a rental agreement",
+   "options": "Month-to-Month\nLong-Term\nDaily/Short-Term"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-01-20 17:44:14.200508",
+ "modified_by": "Administrator",
+ "module": "Airport Shop",
+ "name": "Shop Setting",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

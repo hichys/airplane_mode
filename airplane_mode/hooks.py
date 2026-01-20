@@ -41,7 +41,9 @@ app_include_js = "/assets/airplane_mode/js/notifications.js"
 # include js, css files in header of web template
 # web_include_css = "/assets/airplane_mode/css/airplane_mode.css"
 # web_include_js = "/assets/airplane_mode/js/airplane_mode.js"
-
+web_include_css = [
+    "/assets/airplane_mode/css/shops.css"
+]
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "airplane_mode/public/scss/website"
 
@@ -152,6 +154,11 @@ app_include_js = "/assets/airplane_mode/js/notifications.js"
 
 # Scheduled Tasks
 # ---------------
+scheduler_events = {
+    "monthly": [
+        "airplane_mode.api.send_rent_reminder_email"
+    ]
+}
 
 # scheduler_events = {
 # 	"all": [

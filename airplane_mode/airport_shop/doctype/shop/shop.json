@@ -1,23 +1,25 @@
 {
  "actions": [],
+ "allow_guest_to_view": 1,
  "allow_rename": 1,
+ "autoname": "format:SHOP-{shop_name}-{shop_number}-{YYYY}",
  "creation": "2026-01-07 22:00:39.435566",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "shop_name",
+  "shop_type",
   "shop_number",
   "column_break_eung",
   "airport",
-  "tenant__information_section",
-  "tenant_name",
-  "tenant_email",
+  "status",
+  "route",
+  "is_published",
   "shop_details_section",
-  "area",
+  "shop_area",
   "contract_period",
   "column_break_xdmk",
-  "rent",
-  "rent_period_dailymonthlyyearly",
+  "rent_amount",
   "section_break_clrx",
   "note",
   "section_break_dqlr",
@@ -39,39 +41,17 @@
    "search_index": 1
   },
   {
-   "fieldname": "shop_name",
-   "fieldtype": "Data",
-   "label": "Shop Name"
-  },
-  {
    "fieldname": "shop_number",
-   "fieldtype": "Data",
-   "label": "Shop Number"
-  },
-  {
-   "fieldname": "tenant__information_section",
-   "fieldtype": "Section Break",
-   "label": "Tenant  Information"
-  },
-  {
-   "fieldname": "tenant_name",
-   "fieldtype": "Data",
-   "label": "Tenant Name"
-  },
-  {
-   "fieldname": "tenant_email",
-   "fieldtype": "Data",
-   "label": "Tenant Email"
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Shop Number",
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "shop_details_section",
    "fieldtype": "Section Break",
-   "label": "Contract Details"
-  },
-  {
-   "fieldname": "area",
-   "fieldtype": "Data",
-   "label": "Area"
+   "label": "Shop Details"
   },
   {
    "fieldname": "section_break_clrx",
@@ -90,38 +70,81 @@
   {
    "fieldname": "airport",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Airport",
-   "options": "Airport"
-  },
-  {
-   "fieldname": "rent",
-   "fieldtype": "Currency",
-   "label": "Rent"
-  },
-  {
-   "fieldname": "rent_period_dailymonthlyyearly",
-   "fieldtype": "Select",
-   "label": "Rent Period Daily/Monthly/Yearly",
-   "options": "Daily\nMonthly\nYearly"
+   "options": "Airport",
+   "reqd": 1
   },
   {
    "fieldname": "contract_period",
    "fieldtype": "Duration",
-   "label": "Contract Period"
+   "label": "Ideal Contract Period"
   },
   {
    "fieldname": "column_break_xdmk",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rent_amount",
+   "fieldtype": "Currency",
+   "label": "Ideal Rent Amount"
+  },
+  {
+   "fieldname": "shop_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Shop Name",
+   "reqd": 1
+  },
+  {
+   "default": "Available",
+   "description": "<div>\n<p> <span style=\"color:blue;\">\nAvailable:</span> : its free<br></p>\n<p> <span style=\"color:blue;\">\nReserved:</span> \nIt has Contract Lead or the Contract duration  has not been started </p>\n</div>",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Available\nRented\nUnder Maintenance\nReserved",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shop_area",
+   "fieldtype": "Data",
+   "label": "Shop Area"
+  },
+  {
+   "fieldname": "shop_type",
+   "fieldtype": "Link",
+   "label": "Shop Type",
+   "link_filters": "[[\"Shop Type\",\"enabled\",\"=\",1]]",
+   "options": "Shop Type"
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_published",
+   "fieldtype": "Check",
+   "label": "Is published"
   }
  ],
  "grid_page_length": 50,
+ "has_web_view": 1,
  "index_web_pages_for_search": 1,
+ "is_published_field": "is_published",
  "is_submittable": 1,
- "links": [],
- "modified": "2026-01-07 22:12:42.702317",
+ "links": [
+  {
+   "link_doctype": "Shop Contract",
+   "link_fieldname": "shop"
+  }
+ ],
+ "modified": "2026-01-20 23:40:18.492333",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Shop",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -138,6 +161,7 @@
    "write": 1
   }
  ],
+ "route": "shops",
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
  "sort_field": "creation",
