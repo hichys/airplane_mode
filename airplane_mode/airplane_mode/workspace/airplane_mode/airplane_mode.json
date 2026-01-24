@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"EnOUdzXwbB\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Airplane Mode</span>\",\"col\":12}},{\"id\":\"doWTDHDifp\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Airline\",\"col\":3}},{\"id\":\"Y3m9hm1Wwu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Airplane Flight\",\"col\":3}},{\"id\":\"BcwGgaV6fh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Flight Passenger\",\"col\":4}},{\"id\":\"4YEGZWyvtj\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Airplane\",\"col\":4}}]",
+ "content": "[{\"id\":\"EnOUdzXwbB\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Airplane Mode</span>\",\"col\":12}},{\"id\":\"doWTDHDifp\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Airline\",\"col\":3}},{\"id\":\"Y3m9hm1Wwu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Airplane Flight\",\"col\":3}},{\"id\":\"BcwGgaV6fh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Flight Passenger\",\"col\":4}},{\"id\":\"p3kGnPXZAj\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Shops</b></span>\",\"col\":12}},{\"id\":\"53662lWLI3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Shop\",\"col\":3}},{\"id\":\"VuaUJaCK6A\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Shop Contract\",\"col\":3}},{\"id\":\"sab5iBe1ti\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Shop Lead\",\"col\":3}}]",
  "creation": "2025-11-23 22:33:20.695594",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "Airplane Mode",
  "links": [],
- "modified": "2026-01-17 15:43:09.170046",
+ "modified": "2026-01-21 22:13:34.910041",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Mode",
@@ -25,6 +25,14 @@
  "roles": [],
  "sequence_id": 28.0,
  "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Shop",
+   "link_to": "Shop",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
   {
    "color": "Grey",
    "doc_view": "List",
@@ -42,6 +50,14 @@
    "type": "DocType"
   },
   {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Shop Contract",
+   "link_to": "Shop Contract",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
    "color": "Yellow",
    "doc_view": "List",
    "label": "Flight Passenger",
@@ -50,10 +66,10 @@
    "type": "DocType"
   },
   {
-   "color": "Cyan",
+   "color": "Green",
    "doc_view": "List",
-   "label": "Airplane",
-   "link_to": "Airplane",
+   "label": "Shop Lead",
+   "link_to": "Shop Lead",
    "stats_filter": "[]",
    "type": "DocType"
   }

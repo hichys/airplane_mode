@@ -7,10 +7,10 @@
  "field_order": [
   "section_break_dlgc",
   "shop_contract",
-  "payment_for_month",
   "paid_on",
   "amount",
-  "status",
+  "column_break_gvif",
+  "remaining_amount",
   "section_break_vvag",
   "amended_from"
  ],
@@ -44,31 +44,33 @@
   {
    "fieldname": "paid_on",
    "fieldtype": "Date",
-   "label": "Paid On"
+   "label": "Paid On",
+   "reqd": 1
   },
   {
    "fieldname": "amount",
    "fieldtype": "Currency",
-   "label": "Amount"
+   "label": "Amount",
+   "non_negative": 1,
+   "reqd": 1
   },
   {
-   "default": "Pending",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Pending\nPaid\nOverdue"
+   "fieldname": "column_break_gvif",
+   "fieldtype": "Column Break"
   },
   {
-   "fieldname": "payment_for_month",
-   "fieldtype": "HTML",
-   "label": "payment_for_month"
+   "fieldname": "remaining_amount",
+   "fieldtype": "Currency",
+   "label": "Remaining Amount ",
+   "no_copy": 1,
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-18 17:46:47.887058",
+ "modified": "2026-01-23 01:43:47.258651",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Rent Payment",

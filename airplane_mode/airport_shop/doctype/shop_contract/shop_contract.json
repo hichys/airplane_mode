@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:SC-{tenant}-{MM}{YYYY}{####}",
+ "autoname": "format:SC-{shop}-{MM}{YYYY}{####}",
  "creation": "2026-01-17 15:50:33.233365",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -15,8 +15,13 @@
   "start_date",
   "end_date",
   "contract_period",
-  "payment_cycle",
+  "payment_section",
+  "amount",
   "grace_period",
+  "column_break_keeg",
+  "payment_cycle",
+  "section_break_vsxi",
+  "renewed_contract",
   "section_break_szvf",
   "amended_from"
  ],
@@ -57,16 +62,19 @@
    "label": "Contract Info"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "start_date",
    "fieldtype": "Date",
    "label": "Start Date"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "end_date",
    "fieldtype": "Date",
    "label": "End Date"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "contract_period",
    "fieldtype": "Duration",
    "label": "Contract Period"
@@ -100,6 +108,30 @@
    "fieldtype": "Datetime",
    "label": "Date and time",
    "reqd": 1
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "Rent Info"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount"
+  },
+  {
+   "fieldname": "column_break_keeg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_vsxi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "renewed_contract",
+   "fieldtype": "Link",
+   "label": "Renewed Contract",
+   "options": "Shop Contract"
   }
  ],
  "grid_page_length": 50,
@@ -111,7 +143,7 @@
    "link_fieldname": "shop_contract"
   }
  ],
- "modified": "2026-01-20 22:01:01.958445",
+ "modified": "2026-01-23 16:46:43.808526",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Shop Contract",

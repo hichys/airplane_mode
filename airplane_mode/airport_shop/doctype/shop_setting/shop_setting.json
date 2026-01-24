@@ -8,6 +8,7 @@
   "default_setting_section",
   "default_rent_amount",
   "rent_reminders",
+  "default_grace_days",
   "column_break_bpkh",
   "rental_type"
  ],
@@ -38,13 +39,18 @@
    "fieldtype": "Select",
    "label": "The minimum days for a rental agreement",
    "options": "Month-to-Month\nLong-Term\nDaily/Short-Term"
+  },
+  {
+   "fieldname": "default_grace_days",
+   "fieldtype": "Int",
+   "label": "Default Grace Days"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-01-20 17:44:14.200508",
+ "modified": "2026-01-23 02:23:20.168463",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Shop Setting",

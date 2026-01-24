@@ -1,7 +1,7 @@
 # Copyright (c) 2025, awad mohamed and contributors
 # For license information, please see license.txt
 import frappe
-from frappe.utils import nowdate
+from frappe.utils import nowdate,date_diff,add_days
 import random
 @frappe.whitelist()
 def is_airplane_full(flight):
@@ -16,9 +16,10 @@ def is_airplane_full(flight):
 		return True
 	return False
 
-
+#scheduler_events , Hourly and monthly
 @frappe.whitelist()
 def send_rent_reminder_email(shop_name):
+	print("scheduler_events:send_rent_reminder_email")
 	# 1. Permission check
 	if not frappe.has_permission("Shop", "read", shop_name):
 		frappe.throw("Not permitted")
@@ -55,6 +56,29 @@ def send_rent_reminder_email(shop_name):
 		"rent_amount": shop.rent_amount
 	}
 
+def is_contract_expire_today(contract_doc) :
+	"""
+	return : all contracts thats expiring today
+	"""
+	today = frappe.utils.nowdate()
+	diff = date_diff(contract_doc.end_date,today) 
+	# print(diff)
+	return diff == 0
+
+def get_contract_remining_days(contract_doc) -> int:
+	"""
+	Return how many days are left until the contract finishes.
+	If the contract already ended, return 0.
+	"""
+	today = nowdate()
+	end_date = contract_doc.end_date
+
+	if not end_date:
+		return 0
+
+	remaining_days = date_diff(end_date, today)
+
+	return max(remaining_days, 0)
 
 @frappe.whitelist()
 def is_rent_reminders_enabled():
@@ -74,6 +98,31 @@ def send_monthly_rent_reminders():
 		"status": "success",
 		"message": "Rent reminders sent successfully for all shops"
 	}
+
+
+@frappe.whitelist()
+def contracts_ends_in_3_days():
+	target_date = frappe.utils.add_days(frappe.utils.nowdate(), 3)
+
+	return frappe.get_all(
+		"Shop Contract",
+		filters={
+			"end_date": target_date,
+			"docstatus": 1
+		},
+		fields=["name", "tenant", "end_date"]
+	)
+
+
+@frappe.whitelist()
+def send_reminders_before_3_days() :
+	contracts = contracts_ends_in_3_days()
+	emails = []
+	for doc in contracts:
+		tenant_email = frappe.db.get_value("Tenant",doc.tenant,'email')
+		emails.append(tenant_email)
+
+	
 
 @frappe.whitelist()
 def get_random_shop_number() -> int:

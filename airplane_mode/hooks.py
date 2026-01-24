@@ -152,12 +152,19 @@ web_include_css = [
 # 	}
 # }
 
+# workflow_methods = [
+#     {"name": "Notify Active State", "method": "airplane_mode.airport_shop.notification.notification.send_active_notification"}
+# ]
 # Scheduled Tasks
 # ---------------
 scheduler_events = {
-    "monthly": [
-        "airplane_mode.api.send_rent_reminder_email"
-    ]
+    "daily": [
+		"airplane_mode.airport_shop.utils.reminders.schedule_contract_reminders",
+ 		"airplane_mode.airport_shop.utils.reminders.schedule_rent_reminders",
+        "airplane_mode.airport_shop.scheduler.activate_contracts_starting_today",
+        "airplane_mode.airport_shop.scheduler.expire_contracts_ended_yesterday"
+ 	],
+
 }
 
 # scheduler_events = {

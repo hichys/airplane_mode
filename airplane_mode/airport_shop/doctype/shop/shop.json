@@ -1,8 +1,7 @@
 {
  "actions": [],
  "allow_guest_to_view": 1,
- "allow_rename": 1,
- "autoname": "format:SHOP-{shop_name}-{shop_number}-{YYYY}",
+ "autoname": "format:SHOP-{shop_number}",
  "creation": "2026-01-07 22:00:39.435566",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -59,6 +58,7 @@
    "label": "Additional Information"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "note",
    "fieldtype": "Small Text",
    "label": "Note"
@@ -76,6 +76,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "contract_period",
    "fieldtype": "Duration",
    "label": "Ideal Contract Period"
@@ -85,9 +86,10 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "rent_amount",
    "fieldtype": "Currency",
-   "label": "Ideal Rent Amount"
+   "label": "Ideal Monthly Rent Amount"
   },
   {
    "fieldname": "shop_name",
@@ -97,6 +99,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "default": "Available",
    "description": "<div>\n<p> <span style=\"color:blue;\">\nAvailable:</span> : its free<br></p>\n<p> <span style=\"color:blue;\">\nReserved:</span> \nIt has Contract Lead or the Contract duration  has not been started </p>\n</div>",
    "fieldname": "status",
@@ -123,6 +126,7 @@
    "label": "Route"
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "is_published",
    "fieldtype": "Check",
@@ -140,7 +144,7 @@
    "link_fieldname": "shop"
   }
  ],
- "modified": "2026-01-20 23:40:18.492333",
+ "modified": "2026-01-23 01:57:29.586688",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Shop",

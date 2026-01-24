@@ -7,6 +7,7 @@
  "field_order": [
   "information_section",
   "status",
+  "tenant_type",
   "tenant_name",
   "company_name",
   "column_break_xqqh",
@@ -57,6 +58,7 @@
    "label": "Information"
   },
   {
+   "depends_on": "eval:doc.tenant_type  == \"Company\"\n",
    "fieldname": "company_name",
    "fieldtype": "Data",
    "label": "Company Name"
@@ -82,12 +84,24 @@
    "fieldname": "note",
    "fieldtype": "Small Text",
    "label": "Note"
+  },
+  {
+   "default": "Individual",
+   "fieldname": "tenant_type",
+   "fieldtype": "Select",
+   "label": "Tenant Type",
+   "options": "Individual\nCompany"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-01-18 00:28:57.422882",
+ "links": [
+  {
+   "link_doctype": "Shop Contract",
+   "link_fieldname": "tenant"
+  }
+ ],
+ "modified": "2026-01-21 16:40:25.259879",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Tenant",

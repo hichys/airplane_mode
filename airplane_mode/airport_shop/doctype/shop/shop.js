@@ -81,6 +81,7 @@ frappe.ui.form.on("Shop", {
         });
     
 },
+    
     async onload(frm) {
         
         // frappe.msgprint("on_load");
