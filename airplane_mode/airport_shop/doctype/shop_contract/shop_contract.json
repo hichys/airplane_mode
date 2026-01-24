@@ -22,6 +22,8 @@
   "payment_cycle",
   "section_break_vsxi",
   "renewed_contract",
+  "lead_info_section",
+  "from_lead",
   "section_break_szvf",
   "amended_from"
  ],
@@ -132,6 +134,18 @@
    "fieldtype": "Link",
    "label": "Renewed Contract",
    "options": "Shop Contract"
+  },
+  {
+   "fieldname": "lead_info_section",
+   "fieldtype": "Section Break",
+   "label": "Lead Info"
+  },
+  {
+   "fieldname": "from_lead",
+   "fieldtype": "Link",
+   "label": "From Lead",
+   "options": "Shop Lead",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
@@ -143,7 +157,7 @@
    "link_fieldname": "shop_contract"
   }
  ],
- "modified": "2026-01-23 16:46:43.808526",
+ "modified": "2026-01-24 23:32:21.255792",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Shop Contract",

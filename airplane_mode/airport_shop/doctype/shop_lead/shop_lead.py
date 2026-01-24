@@ -12,6 +12,9 @@ class ShopLead(Document):
 def make_contract(source_name):
     def set_missing_values(source, target):
         target.start_date = frappe.utils.today()
+        target.shop_lead = source.name
+        # target.tenant = source.tenant
+        # target.shop = source.shop
 
     doc = frappe.model.mapper.get_mapped_doc(
         "Shop Lead",

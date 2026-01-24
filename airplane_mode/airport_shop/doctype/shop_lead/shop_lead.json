@@ -10,7 +10,8 @@
   "email",
   "column_break_myfq",
   "status",
-  "message",
+  "notes_section",
+  "note",
   "section_break_n719",
   "amended_from"
  ],
@@ -52,28 +53,40 @@
    "reqd": 1
   },
   {
-   "fieldname": "message",
-   "fieldtype": "Small Text",
-   "label": "message"
-  },
-  {
    "fieldname": "column_break_myfq",
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "default": "New",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
    "options": "New\nContacted\nNegotiating\nConverted\nRejected",
    "reqd": 1
+  },
+  {
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Info"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "note",
+   "fieldtype": "Long Text",
+   "label": "Notes"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2026-01-21 00:22:26.654808",
+ "links": [
+  {
+   "link_doctype": "Shop Contract",
+   "link_fieldname": "from_lead"
+  }
+ ],
+ "modified": "2026-01-24 23:37:25.628215",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Shop Lead",
