@@ -16,6 +16,7 @@ frappe.ui.form.on("Shop Lead", {
             ,"Create");
         }
         if(frm.doc.docstatus === 1 && frm.doc.status === "Converted"){
+            //TODO Server Validation !!
             if(!frm.doc._is_locked  )
             {
                 frm.add_custom_button(
