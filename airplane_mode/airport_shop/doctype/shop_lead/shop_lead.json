@@ -9,6 +9,7 @@
   "shop",
   "email",
   "column_break_myfq",
+  "_is_locked",
   "status",
   "notes_section",
   "note",
@@ -75,6 +76,14 @@
    "fieldname": "note",
    "fieldtype": "Long Text",
    "label": "Notes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "_is_locked",
+   "fieldtype": "Check",
+   "label": "Locked",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
@@ -86,7 +95,7 @@
    "link_fieldname": "from_lead"
   }
  ],
- "modified": "2026-01-24 23:37:25.628215",
+ "modified": "2026-01-24 23:50:34.636311",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Shop Lead",
