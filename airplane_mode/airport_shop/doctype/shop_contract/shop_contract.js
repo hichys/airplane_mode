@@ -18,6 +18,13 @@ frappe.ui.form.on("Shop Contract", {
                     },
                     __("Create")
                 );
+                frm.add_custom_button(
+                    __("Create Sales Invoice"),
+                    () => {
+                        frm.events.create_sales_invoice(frm);
+                    },
+                    __("Create")
+                );
             }
             else
             {
@@ -69,24 +76,43 @@ frappe.ui.form.on("Shop Contract", {
         });
     
     },
-    create_payment(frm) {
-        frappe.model.with_doctype("Rent Payment", () => {
-            let payment = frappe.model.get_new_doc("Rent Payment");
+    create_sales_invoice(frm) {
+        frappe.model.with_doctype("Sales Invoice", () => {
+            //TODO Figure this auto
+            uom = "Unit"
+            income_account = "4120 - Service - A"
+            let si = frappe.model.get_new_doc("Sales Invoice");
+    
+            // Required core fields
+            si.customer = frm.doc.tenant;
+            si.posting_date = frappe.datetime.get_today();
+    
+            // Custom link field (add this in Sales Invoice)
+            si.remarks = frm.doc.name;
+            // Subscription Peroid = Shop contract peroid
+            si.from_date = frm.doc.start_date;
+            si.to_date = frm.doc.end_date;
+            si.due_date = frm.doc.end_date
+           
+            // Add item row (VERY IMPORTANT)
+            let item = frappe.model.add_child(si, "items");
+    
+            item.item_code = "Airport Shop Rent"; // Must exist as Item
+            item.item_name = "Airport Shop Rent";
+            item.qty = 1;
+            item.rate = frm.doc.amount;
+            item.uom = uom
+            item.income_account = income_account
     
     
-            // Reference (VERY IMPORTANT)
-            payment.shop_contract = frm.doc.name
-            payment.amount = frm.doc.amount 
-            payment.paid_on = frappe.datetime.get_today()
+            // Let ERPNext calculate totals
+            si.set_posting_time = 1;
     
-            // Optional: remarks
-    
-            frappe.set_route("Form", "Rent Payment", payment.name);
+            frappe.set_route("Form", "Sales Invoice", si.name);
         });
-    }
+    },
     
-});
-
+})
 function calculate_contract_period(frm) {
     if (frm._updating_contract) return;
 

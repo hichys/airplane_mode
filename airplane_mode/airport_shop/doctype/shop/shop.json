@@ -9,6 +9,7 @@
   "shop_name",
   "shop_type",
   "shop_number",
+  "location",
   "column_break_eung",
   "airport",
   "status",
@@ -89,13 +90,14 @@
    "allow_on_submit": 1,
    "fieldname": "rent_amount",
    "fieldtype": "Currency",
-   "label": "Ideal Monthly Rent Amount"
+   "label": "Monthly Rent Amount"
   },
   {
    "fieldname": "shop_name",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Shop Name",
+   "options": "Asset",
    "reqd": 1
   },
   {
@@ -131,6 +133,12 @@
    "fieldname": "is_published",
    "fieldtype": "Check",
    "label": "Is published"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Link",
+   "label": "Location",
+   "options": "Location"
   }
  ],
  "grid_page_length": 50,
@@ -144,7 +152,7 @@
    "link_fieldname": "shop"
   }
  ],
- "modified": "2026-01-23 01:57:29.586688",
+ "modified": "2026-01-26 14:57:58.811000",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Shop",

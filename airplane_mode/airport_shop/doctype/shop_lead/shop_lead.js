@@ -4,6 +4,7 @@
 frappe.ui.form.on("Shop Lead", {
 	refresh(frm) {
         frm.clear_custom_buttons();
+        
         if (frm.doc.docstatus === 1) {
             frm.add_custom_button(
                 __("Shop Contract"),
@@ -15,29 +16,35 @@ frappe.ui.form.on("Shop Lead", {
                 }
             ,"Create");
         }
-        if(frm.doc.docstatus === 1 && frm.doc.status === "Converted"){
+        if(frm.doc.docstatus === 1 && frm.doc.status === "Converted" ){
             //TODO Server Validation !!
             if(!frm.doc._is_locked  )
             {
                 frm.add_custom_button(
-                    __("Lock"),
+                    __("Lock 🔒"),
                     () => {
-                        frm.set_df_property("status","read_only",1);
-                        frm.set_df_property("note","read_only",1)
+                        frm.toggle_enable([
+                            "status",
+                            "note",
+                        ], false);
                         frm.set_value("_is_locked",1);
-                        frm.save()
+                        frm.save_or_update();
+                        
                     }
                 )
             }
             else
             {
+                
                 frm.add_custom_button(
-                    __("unLock"),
+                    __("unLock 🔓"),
                     () => {
-                        frm.set_df_property("status","read_only",0);
-                        frm.set_df_property("note","read_only",0)
+                        frm.toggle_enable([
+                            "status",
+                            "note",
+                        ], true);
                         frm.set_value("_is_locked",0);
-                        frm.save()
+                        frm.save_or_update();
                     }
                 )
             }

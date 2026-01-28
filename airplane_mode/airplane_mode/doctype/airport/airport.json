@@ -8,7 +8,8 @@
  "field_order": [
   "code",
   "city",
-  "country"
+  "country",
+  "geo_location"
  ],
  "fields": [
   {
@@ -29,12 +30,17 @@
    "fieldtype": "Data",
    "label": "Country",
    "reqd": 1
+  },
+  {
+   "fieldname": "geo_location",
+   "fieldtype": "Geolocation",
+   "label": "Geo Location"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-04 12:37:41.020378",
+ "modified": "2026-01-26 12:48:14.136663",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airport",

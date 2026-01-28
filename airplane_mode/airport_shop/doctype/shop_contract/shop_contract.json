@@ -54,8 +54,8 @@
    "fieldname": "tenant",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Tenant",
-   "options": "Tenant",
+   "label": "Tenant (Customer)",
+   "options": "Customer",
    "reqd": 1
   },
   {
@@ -157,7 +157,7 @@
    "link_fieldname": "shop_contract"
   }
  ],
- "modified": "2026-01-24 23:32:21.255792",
+ "modified": "2026-01-28 00:34:43.164214",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Shop Contract",

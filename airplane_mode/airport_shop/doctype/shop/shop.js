@@ -1,6 +1,9 @@
 // Copyright (c) 2026, awad mohamed and contributors
 // For license information, please see license.txt
 
+
+
+
 async function get_default_rent_amount() {
     const default_rent_amount = await frappe.db.get_single_value("Shop Setting", "default_rent_amount");
     return default_rent_amount;

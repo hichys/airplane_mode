@@ -149,3 +149,11 @@ def check_contract_payment():
 		filters= {"docstatus" : 1}
 		)
 	print(shop_list)
+
+@frappe.whitelist()
+def sentry_test():
+    frappe.log_error(
+		"title",
+		"Message - A"
+	)
+	
