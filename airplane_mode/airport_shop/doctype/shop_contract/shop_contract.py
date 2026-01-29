@@ -1,18 +1,41 @@
 # Copyright (c) 2026, awad mohamed and contributors
 # For license information, please see license.txt
 
+from dataclasses import dataclass
+from typing import Optional, cast
+
 import frappe
 from frappe.model.document import Document
 from frappe.utils import getdate, add_days, today
 from airplane_mode.airport_shop.notification import notification
+
+@dataclass
+class status :
+	approved = "Approved"
+	active = "Active"
+	terminated = "Terminated"
+	expired = "Expired"
+
 class ShopContract(Document):
+	# added for type checkers
+	workflow_state: str
+	start_date : str
+	end_date : str
+
+	
+	def on_cancel(self):
+		if self.workflow_state != status.terminated :
+			frappe.throw(
+				msg = "Please Terminate The contract First"
+			)
+
 	def validate(self):
 		self.validate_date_range()
 		self.validate_no_overlap()
 	def on_change(self):
 		# Check if the state was changed to 'Active'
 		# self.get_doc_before_save() allows comparing current vs previous values
-		previous_doc = self.get_doc_before_save()
+		previous_doc = cast(Optional["ShopContract"], self.get_doc_before_save())
 		if previous_doc and previous_doc.workflow_state != "Active" and self.workflow_state == "Active":
 			notification.trigger_bell_notification(
 				doctype="Shop Contract",
@@ -105,7 +128,7 @@ def get_shop_availability(shop: str, from_date=None):
 
 	from_date = getdate(from_date) if from_date else getdate(today())
 
-	contracts = frappe.db.sql(
+	contracts  = frappe.db.sql(
 		"""
 		SELECT start_date, end_date
 		FROM `tabShop Contract`
@@ -116,7 +139,7 @@ def get_shop_availability(shop: str, from_date=None):
 		""",
 		(shop, from_date),
 		as_dict=True
-	)
+	) 
 
 	cursor = from_date
 
