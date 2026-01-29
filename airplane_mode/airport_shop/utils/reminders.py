@@ -1,6 +1,5 @@
 import frappe
-from frappe.utils import add_days, nowdate
-# from frappe import logger
+from frappe.utils import add_days, nowdate,date_diff
 
 def schedule_contract_reminders():
 	frappe.enqueue(
@@ -73,16 +72,17 @@ def contract_starting_soon_reminders(before_days=3):
 		send emails to tenant about contracts starting soon 
 
 	"""
-	target_date = add_days(nowdate(), before_days)
+	target_date = add_days(nowdate(), -before_days)
 	contracts = frappe.get_all(
 		"Shop Contract",
 		filters={
 			"start_date": target_date,
 			"docstatus": 1,
-			"workflow_state": "Approved",
+			"workflow_state": ["in",["Active","Approved"]],
 		},
 		fields=["name", "tenant", "shop"]
 	)
+	print(contracts)
 	for c in contracts:
 		tenant_email = frappe.db.get_value(
 			"Tenant",
