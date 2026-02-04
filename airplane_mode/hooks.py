@@ -162,7 +162,8 @@ scheduler_events = {
 		"airplane_mode.airport_shop.utils.reminders.schedule_contract_reminders",
  		"airplane_mode.airport_shop.utils.reminders.schedule_rent_reminders",
         "airplane_mode.airport_shop.scheduler.activate_contracts_starting_today",
-        "airplane_mode.airport_shop.scheduler.expire_contracts_ended_yesterday"
+        "airplane_mode.airport_shop.scheduler.expire_contracts_ended_yesterday",
+        "airplane_mode.airport_shop.scheduler.automated_autorenew_shop_contracts"
  	],
 
 }
