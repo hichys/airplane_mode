@@ -6,17 +6,18 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "is_asset_",
+  "shop_asset",
+  "location",
   "shop_name",
   "shop_type",
   "shop_number",
-  "location",
   "column_break_eung",
   "airport",
   "status",
   "route",
   "is_published",
   "shop_details_section",
-  "shop_area",
   "contract_period",
   "column_break_xdmk",
   "rent_amount",
@@ -46,6 +47,7 @@
    "in_list_view": 1,
    "label": "Shop Number",
    "reqd": 1,
+   "set_only_once": 1,
    "unique": 1
   },
   {
@@ -93,11 +95,11 @@
    "label": "Monthly Rent Amount"
   },
   {
+   "fetch_from": "shop_asset.asset_name",
    "fieldname": "shop_name",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Shop Name",
-   "options": "Asset",
    "reqd": 1
   },
   {
@@ -109,11 +111,6 @@
    "label": "Status",
    "options": "Available\nRented\nUnder Maintenance\nReserved",
    "reqd": 1
-  },
-  {
-   "fieldname": "shop_area",
-   "fieldtype": "Data",
-   "label": "Shop Area"
   },
   {
    "fieldname": "shop_type",
@@ -135,6 +132,21 @@
    "label": "Is published"
   },
   {
+   "default": "0",
+   "fieldname": "is_asset_",
+   "fieldtype": "Check",
+   "label": "Is Asset ?",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "shop_asset",
+   "fieldtype": "Link",
+   "label": "Asset",
+   "options": "Asset",
+   "set_only_once": 1
+  },
+  {
+   "fetch_from": "shop_asset.location",
    "fieldname": "location",
    "fieldtype": "Link",
    "label": "Location",
@@ -152,11 +164,11 @@
    "link_fieldname": "shop"
   }
  ],
- "modified": "2026-01-26 14:57:58.811000",
+ "modified": "2026-01-31 22:35:12.712647",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Shop",
- "naming_rule": "Expression",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

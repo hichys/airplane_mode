@@ -13,13 +13,18 @@ from airplane_mode import api
 import frappe
 from frappe.website.website_generator import WebsiteGenerator
 from datetime import datetime
-	
 
 class Shop(WebsiteGenerator):
+	is_asset_ : bool | None
 	def validate(self):
 		self.validate_duplicate_shop_number()
 		if not self.route :
 			frappe.throw("Please Set Shop Route !")
+		if self.is_asset_:
+			if not self.shop_asset :
+				frappe.throw("Please provide asset for this shop or uncheck Is Asset!")
+			
+			
 	def on_submit(self):
 		#TODO create item for sales invoice 
 		#TODO 
