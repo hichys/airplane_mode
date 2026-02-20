@@ -1,37 +1,44 @@
 # Copyright (c) 2026, awad mohamed and contributors
 # For license information, please see license.txt
-
+import datetime
 from dataclasses import dataclass
 from typing import Optional, cast
 
 import frappe
 from frappe.model.document import Document
-from frappe.utils import getdate, add_days, today
+from frappe.utils import add_days, date_diff, getdate, nowdate, today
+
 from airplane_mode.airport_shop.notification import notification
 
+
+# TODO
 @dataclass
-class status :
+class status:
 	approved = "Approved"
 	active = "Active"
 	terminated = "Terminated"
 	expired = "Expired"
 
+
 class ShopContract(Document):
 	# added for type checkers
 	workflow_state: str
-	start_date : str
-	end_date : str
+	start_date: str
+	end_date: datetime.datetime
+	contract_period: datetime.datetime
+	auto_renew: bool
+	shop: str
+	tenant: str
+	payment_cycle: str
 
-	
 	def on_cancel(self):
-		if self.workflow_state != status.terminated :
-			frappe.throw(
-				msg = "Please Terminate The contract First"
-			)
+		if self.workflow_state != status.terminated:
+			frappe.throw(msg="Please Terminate The contract First")
 
 	def validate(self):
 		self.validate_date_range()
 		self.validate_no_overlap()
+
 	def on_change(self):
 		# Check if the state was changed to 'Active'
 		# self.get_doc_before_save() allows comparing current vs previous values
@@ -41,33 +48,34 @@ class ShopContract(Document):
 				doctype="Shop Contract",
 				docname=self.name,
 				recipient="Administrator",
-				message=f"Contract updated",
-				subject= f'Contract : {self.name} is Activate Now'
+				message="Contract updated",
+				subject=f"Contract : {self.name} is Activate Now",
 			)
 
 	def validate_date_range(self):
 		if not self.start_date or not self.end_date:
 			frappe.throw("Start Date and End Date are required")
 
-		if getdate(self.end_date) < getdate(self.start_date):
+		if (self.end_date) < (self.start_date):
 			frappe.throw("End Date cannot be before Start Date")
+
 	def validate_no_overlap(self):
-		start = getdate(self.start_date)
-		end = getdate(self.end_date)
+		# start = getdate(self.start_date)
+		# end = getdate(self.end_date)
 
 		overlapping = frappe.db.sql(
 			"""
 			SELECT name, start_date, end_date
 			FROM `tabShop Contract`
 			WHERE shop = %s
-			  AND docstatus = 1
-			  AND name != %s
-			  AND start_date <= %s
-			  AND end_date >= %s
+			AND docstatus = 1
+			AND name != %s
+			AND start_date <= %s
+			AND end_date >= %s
 			LIMIT 1
 			""",
-			(self.shop, self.name or "", end, start),
-			as_dict=True
+			(self.shop, self.name or "", self.end_date, self.start_date),
+			as_dict=True,
 		)
 
 		if overlapping:
@@ -78,17 +86,15 @@ class ShopContract(Document):
 				<br><b>{c.name}</b>
 				<br>From <b>{c.start_date}</b> to <b>{c.end_date}</b>
 				""",
-				title="Overlapping Contract"
+				title="Overlapping Contract",
 			)
 
 
-
-def update_contract_status() -> dict[str:str] :
-	updated_contract = list()
-
-	
+def update_contract_status() -> dict[str, str]:
+	updated_contract = dict()
 
 	return updated_contract
+
 
 def is_shop_rented_in_period(shop: str, start_date, end_date) -> bool:
 	"""
@@ -119,16 +125,17 @@ def is_shop_rented_in_period(shop: str, start_date, end_date) -> bool:
 		LIMIT 1
 		""",
 		(shop, end_date, start_date),
-		as_dict=True
+		as_dict=True,
 	)
 	print(result)
 	return bool(result)
+
 
 def get_shop_availability(shop: str, from_date=None):
 
 	from_date = getdate(from_date) if from_date else getdate(today())
 
-	contracts  = frappe.db.sql(
+	contracts = frappe.db.sql(
 		"""
 		SELECT start_date, end_date
 		FROM `tabShop Contract`
@@ -138,8 +145,8 @@ def get_shop_availability(shop: str, from_date=None):
 		ORDER BY start_date ASC
 		""",
 		(shop, from_date),
-		as_dict=True
-	) 
+		as_dict=True,
+	)
 
 	cursor = from_date
 
@@ -149,18 +156,35 @@ def get_shop_availability(shop: str, from_date=None):
 
 		# GAP FOUND
 		if start > cursor:
-			return {
-				"available_from": cursor,
-				"available_to": add_days(start, -1)
-			}
+			return {"available_from": cursor, "available_to": add_days(start, -1)}
 
 		# Move cursor forward
 		cursor = max(cursor, add_days(end, 1))
 
 	# No gaps → available after last contract
-	return {
-		"available_from": cursor,
-		"available_to": "Open"
-	}
+	return {"available_from": cursor, "available_to": "Open"}
 
 
+@frappe.whitelist()
+def make_renewal(source_name, target_doc=None):
+	def postprocess(source, target):
+		target.start_date = nowdate()
+		old_contract_period_in_days = date_diff(source.end_date, source.start_date) + 1
+		# print(f">>>>>>>>>>>> {old_contract_period_in_days} now date is {nowdate()}")
+		# old_contract_period_in_days = source.contract_period / 24 / 60 / 60
+		target.end_date = add_days(nowdate(), old_contract_period_in_days)
+
+		target.status = "Draft"
+		target.renewed_from = source.name
+
+	return frappe.model.mapper.get_mapped_doc(
+		"Shop Contract",
+		source_name,
+		{
+			"Shop Contract": {
+				"doctype": "Shop Contract",
+			}
+		},
+		target_doc,
+		postprocess,
+	)

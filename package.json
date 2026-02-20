@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "@anygridtech/frappe-agt-types": "^4.0.1",
     "@sentry/cli": "^3.1.0"
+  },
+  "devDependencies": {
+    "@anygridtech/frappe-ts-tools": "^0.2.0",
+    "@anygridtech/frappe-types": "^2.1.1",
+    "typescript": "^5.9.3"
   }
 }

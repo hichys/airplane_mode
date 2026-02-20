@@ -9,14 +9,7 @@ app_license = "mit"
 # ------------------
 # hooks.py
 
-fixtures = [
-    {
-        "dt": "Web Form",
-        "filters": [
-            ["name", "in", ["book-flight-ticket"]]
-        ]
-    }
-]
+fixtures = [{"dt": "Web Form", "filters": [["name", "in", ["book-flight-ticket"]]]}]
 
 # required_apps = []
 
@@ -36,14 +29,15 @@ fixtures = [
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/airplane_mode/css/airplane_mode.css"
-app_include_js = "/assets/airplane_mode/js/notifications.js"
+app_include_js = [
+	"/assets/airplane_mode/js/notifications.js",
+	"/assets/airplane_mode/js/disable_no_connection.js",
+]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/airplane_mode/css/airplane_mode.css"
 # web_include_js = "/assets/airplane_mode/js/airplane_mode.js"
-web_include_css = [
-    "/assets/airplane_mode/css/shops.css"
-]
+web_include_css = ["/assets/airplane_mode/css/shops.css"]
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "airplane_mode/public/scss/website"
 
@@ -158,14 +152,13 @@ web_include_css = [
 # Scheduled Tasks
 # ---------------
 scheduler_events = {
-    "daily": [
+	"daily": [
 		"airplane_mode.airport_shop.utils.reminders.schedule_contract_reminders",
- 		"airplane_mode.airport_shop.utils.reminders.schedule_rent_reminders",
-        "airplane_mode.airport_shop.scheduler.activate_contracts_starting_today",
-        "airplane_mode.airport_shop.scheduler.expire_contracts_ended_yesterday",
-        "airplane_mode.airport_shop.scheduler.automated_autorenew_shop_contracts"
- 	],
-
+		"airplane_mode.airport_shop.utils.reminders.schedule_rent_reminders",
+		"airplane_mode.airport_shop.scheduler.activate_contracts_starting_today",
+		"airplane_mode.airport_shop.scheduler.expire_contracts_ended_yesterday",
+		"airplane_mode.airport_shop.scheduler.automated_autorenew_shop_contracts",
+	],
 }
 
 # scheduler_events = {
@@ -187,15 +180,8 @@ scheduler_events = {
 # }
 
 scheduler_events = {
-	"hourly": [
-		"airplane_mode.tasks.hourly"
-	],
-    "cron": {
-    "55 12 * * *": [
-        "airplane_mode.tasks.everyday"
-    ]
-    }
-	
+	"hourly": ["airplane_mode.tasks.hourly"],
+	"cron": {"55 12 * * *": ["airplane_mode.tasks.everyday"]},
 }
 # Testing
 # -------
@@ -285,4 +271,3 @@ scheduler_events = {
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-

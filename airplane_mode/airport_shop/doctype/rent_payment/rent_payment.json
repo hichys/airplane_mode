@@ -12,7 +12,7 @@
   "column_break_gvif",
   "remaining_amount",
   "section_break_vvag",
-  "table_bkzp",
+  "payment",
   "section_break_vffx",
   "amended_from"
  ],
@@ -68,20 +68,20 @@
    "read_only": 1
   },
   {
-   "fieldname": "table_bkzp",
-   "fieldtype": "Table",
-   "options": "Payment Entry Reference"
-  },
-  {
    "fieldname": "section_break_vffx",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "payment",
+   "fieldtype": "Table",
+   "options": "Payment Entry Reference"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-25 00:59:09.076709",
+ "modified": "2026-02-07 20:07:59.797538",
  "modified_by": "Administrator",
  "module": "Airport Shop",
  "name": "Rent Payment",

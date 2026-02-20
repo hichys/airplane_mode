@@ -1,185 +1,191 @@
 {
- "actions": [],
- "allow_rename": 1,
- "autoname": "format:SC-{shop}-{MM}{YYYY}{####}",
- "creation": "2026-01-17 15:50:33.233365",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "contract_info_section",
-  "date_time",
-  "shop",
-  "tenant",
-  "auto_renew",
-  "column_break_tktd",
-  "start_date",
-  "end_date",
-  "contract_period",
-  "payment_section",
-  "amount",
-  "grace_period",
-  "column_break_keeg",
-  "payment_cycle",
-  "section_break_vsxi",
-  "renewed_contract",
-  "lead_info_section",
-  "from_lead",
-  "section_break_szvf",
-  "amended_from"
- ],
- "fields": [
-  {
-   "fieldname": "section_break_szvf",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Shop Contract",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "shop",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "shop",
-   "options": "Shop",
-   "reqd": 1
-  },
-  {
-   "fieldname": "tenant",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Tenant (Customer)",
-   "options": "Customer",
-   "reqd": 1
-  },
-  {
-   "fieldname": "contract_info_section",
-   "fieldtype": "Section Break",
-   "label": "Contract Info"
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "start_date",
-   "fieldtype": "Date",
-   "label": "Start Date"
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "end_date",
-   "fieldtype": "Date",
-   "label": "End Date"
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "contract_period",
-   "fieldtype": "Duration",
-   "label": "Contract Period"
-  },
-  {
-   "default": "Monthly",
-   "fieldname": "payment_cycle",
-   "fieldtype": "Select",
-   "label": "Payment Cycle",
-   "options": "Daily\nMonthly\nYearly"
-  },
-  {
-   "fieldname": "column_break_tktd",
-   "fieldtype": "Column Break"
-  },
-  {
-   "allow_on_submit": 1,
-   "default": "1",
-   "fieldname": "auto_renew",
-   "fieldtype": "Check",
-   "label": "Auto Renew"
-  },
-  {
-   "fieldname": "grace_period",
-   "fieldtype": "Duration",
-   "label": "Grace Period"
-  },
-  {
-   "default": "now",
-   "fieldname": "date_time",
-   "fieldtype": "Datetime",
-   "label": "Date and time",
-   "reqd": 1
-  },
-  {
-   "fieldname": "payment_section",
-   "fieldtype": "Section Break",
-   "label": "Rent Info"
-  },
-  {
-   "fieldname": "amount",
-   "fieldtype": "Currency",
-   "label": "Total Amount"
-  },
-  {
-   "fieldname": "column_break_keeg",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_vsxi",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "renewed_contract",
-   "fieldtype": "Link",
-   "label": "Renewed Contract",
-   "options": "Shop Contract"
-  },
-  {
-   "fieldname": "lead_info_section",
-   "fieldtype": "Section Break",
-   "label": "Lead Info"
-  },
-  {
-   "fieldname": "from_lead",
-   "fieldtype": "Link",
-   "label": "From Lead",
-   "options": "Shop Lead",
-   "read_only": 1
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "is_submittable": 1,
- "links": [
-  {
-   "link_doctype": "Rent Payment",
-   "link_fieldname": "shop_contract"
-  }
- ],
- "modified": "2026-01-28 00:34:43.164214",
- "modified_by": "Administrator",
- "module": "Airport Shop",
- "name": "Shop Contract",
- "naming_rule": "Expression",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": []
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "format:SC-{shop}-{MM}{YYYY}{####}",
+  "creation": "2026-01-17 15:50:33.233365",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "contract_info_section",
+    "date_time",
+    "shop",
+    "tenant",
+    "auto_renew",
+    "column_break_tktd",
+    "start_date",
+    "end_date",
+    "contract_period",
+    "payment_section",
+    "amount",
+    "grace_period",
+    "column_break_keeg",
+    "payment_cycle",
+    "section_break_vsxi",
+    "renewed_from",
+    "lead_info_section",
+    "from_lead",
+    "section_break_szvf",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_break_szvf",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Shop Contract",
+      "print_hide": 1,
+      "read_only": 1,
+      "search_index": 1
+    },
+    {
+      "fieldname": "shop",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "shop",
+      "options": "Shop",
+      "reqd": 1
+    },
+    {
+      "fieldname": "tenant",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Tenant (Customer)",
+      "options": "Customer",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contract_info_section",
+      "fieldtype": "Section Break",
+      "label": "Contract Info"
+    },
+    {
+      "allow_on_submit": 1,
+      "fieldname": "start_date",
+      "fieldtype": "Date",
+      "label": "Start Date"
+    },
+    {
+      "allow_on_submit": 1,
+      "fieldname": "end_date",
+      "fieldtype": "Date",
+      "label": "End Date"
+    },
+    {
+      "allow_on_submit": 1,
+      "fieldname": "contract_period",
+      "fieldtype": "Duration",
+      "label": "Contract Period"
+    },
+    {
+      "default": "Monthly",
+      "fieldname": "payment_cycle",
+      "fieldtype": "Select",
+      "label": "Payment Cycle",
+      "options": "Daily\nMonthly\nYearly"
+    },
+    {
+      "fieldname": "column_break_tktd",
+      "fieldtype": "Column Break"
+    },
+    {
+      "allow_on_submit": 1,
+      "default": "1",
+      "fieldname": "auto_renew",
+      "fieldtype": "Check",
+      "label": "Auto Renew"
+    },
+    {
+      "fieldname": "grace_period",
+      "fieldtype": "Duration",
+      "label": "Grace Period"
+    },
+    {
+      "default": "now",
+      "fieldname": "date_time",
+      "fieldtype": "Datetime",
+      "label": "Date and time",
+      "reqd": 1
+    },
+    {
+      "fieldname": "payment_section",
+      "fieldtype": "Section Break",
+      "label": "Rent Info"
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "label": "Total Amount"
+    },
+    {
+      "fieldname": "column_break_keeg",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "section_break_vsxi",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "lead_info_section",
+      "fieldtype": "Section Break",
+      "label": "Lead Info"
+    },
+    {
+      "fieldname": "from_lead",
+      "fieldtype": "Link",
+      "label": "From Lead",
+      "options": "Shop Lead",
+      "read_only": 1
+    },
+    {
+      "fieldname": "renewed_from",
+      "fieldtype": "Link",
+      "label": "Renewed From",
+      "options": "Shop Contract"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [
+    {
+      "group": "Rent Collection",
+      "link_doctype": "Rent Payment",
+      "link_fieldname": "shop_contract"
+    },
+    {
+      "group": "Renewed Contracts",
+      "link_doctype": "Shop Contract",
+      "link_fieldname": "renewed_from"
+    }
+  ],
+  "modified": "2026-02-02 17:40:51.954873",
+  "modified_by": "Administrator",
+  "module": "Airport Shop",
+  "name": "Shop Contract",
+  "naming_rule": "Expression (old style)",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "row_format": "Dynamic",
+  "rows_threshold_for_grid_search": 20,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": []
 }

@@ -7,8 +7,8 @@
  "engine": "InnoDB",
  "field_order": [
   "code",
-  "city",
   "country",
+  "city",
   "geo_location"
  ],
  "fields": [
@@ -40,7 +40,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-26 12:48:14.136663",
+ "modified": "2026-01-29 13:25:38.463848",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airport",
